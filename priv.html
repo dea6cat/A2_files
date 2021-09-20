@@ -1,0 +1,173 @@
+<html>
+        <head>
+          <title>A2 Virtual Assistant privacy policy.</title>
+    <style>
+    
+    html {
+      background:#ecf0f1;
+    }
+    canvas {
+      display:block;
+      margin:auto;
+      background:#ecf0f1;
+    }
+    .container {
+        max-width: 70vw;
+        padding: 30px;
+        margin: auto;
+        font-size: 20px;
+        line-height: 1.5;
+    }
+    </style>
+    
+    </head>
+    <body> 
+        <canvas id="Canvas"></canvas>
+        <div class="container">
+    <h1>A2 Virtual Assistant privacy policy.</h1>
+    <h4>A2 Virtual Assistant privacy policy. I do my utmost to protect the 
+    security of personal information for users of A2. <br/>Find our full privacy policy here.</h4>
+    
+    <h3>TERMS & POLICIES</h3>
+    <p>
+            Alexander Montolio Ramirez ("AMR"), protecting your privacy is a top priority. 
+            I strictly protect the security of any and all personal information you provide to us while
+             using AMR products and services. I do not share or sell information to any third party and 
+             I proactively protect all user data from disclosure, with the only exception being if requested by legitimate law agencies with a court order.
+    
+    </p>
+    <p>
+            Your browsing history such as visited URLs, 
+            typed search keywords and downloaded content are stored in your client profile and only accessible
+             by your own action. AMR has no access to this data. 
+            Your history cannot be shared unless it is by your own action.
+    </p>
+    <p>A2 features a built-in history dynamic system, which stores your login credentials 
+        for sites where you've visited. AMR uses password storage frameworks provided by the operating system on your 
+        computer device and your data is encrypted if encryption is supported by the framework.</p>
+
+      </div>
+    
+        <script>
+            var c = document.getElementById("Canvas");
+    var ctx = c.getContext("2d");
+    var mask;
+    
+    var pointCount = 500;
+    var str = "Privacy";
+    var fontStr = "bold 128pt Helvetica Neue, Helvetica, Arial, sans-serif";
+    
+    ctx.font = fontStr;
+    ctx.textAlign = "center";
+    c.width = ctx.measureText(str).width;
+    c.height = 120; // Set to font size
+    
+    var whitePixels = [];
+    var points = [];
+    var point = function(x,y,vx,vy){
+      this.x = x;
+      this.y = y;
+      this.vx = vx || 1;
+      this.vy = vy || 1;
+    }
+    point.prototype.update = function() {
+      ctx.beginPath();
+      ctx.fillStyle = "#95a5a6";
+      ctx.arc(this.x,this.y,1,0,2*Math.PI);
+      ctx.fill();
+      ctx.closePath();
+      
+      // Change direction if running into black pixel
+      if (this.x+this.vx >= c.width || this.x+this.vx < 0 || mask.data[coordsToI(this.x+this.vx, this.y, mask.width)] != 255) {
+        this.vx *= -1;
+        this.x += this.vx*2;
+      }
+      if (this.y+this.vy >= c.height || this.y+this.vy < 0 || mask.data[coordsToI(this.x, this.y+this.vy, mask.width)] != 255) {
+        this.vy *= -1;
+        this.y += this.vy*2;
+      }
+      
+      for (var k = 0, m = points.length; k<m; k++) {
+        if (points[k]===this) continue;
+        
+        var d = Math.sqrt(Math.pow(this.x-points[k].x,2)+Math.pow(this.y-points[k].y,2));
+        if (d < 5) {
+          ctx.lineWidth = .2;
+          ctx.beginPath();
+          ctx.moveTo(this.x,this.y);
+          ctx.lineTo(points[k].x,points[k].y);
+          ctx.stroke();
+        }
+        if (d < 20) {
+          ctx.lineWidth = .1;
+          ctx.beginPath();
+          ctx.moveTo(this.x,this.y);
+          ctx.lineTo(points[k].x,points[k].y);
+          ctx.stroke();
+        }
+      }
+      
+      this.x += this.vx;
+      this.y += this.vy;
+    }
+    
+    function loop() {
+      ctx.clearRect(0,0,c.width,c.height);
+      for (var k = 0, m = points.length; k < m; k++) {
+        points[k].update();
+      }
+    }
+    
+    function init() {
+      // Draw text
+      ctx.beginPath();
+      ctx.fillStyle = "#000";
+      ctx.rect(0,0,c.width,c.height);
+      ctx.fill();
+      ctx.font = fontStr;
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(str,0,c.height/2+(c.height / 2));
+      ctx.closePath();
+      
+      // Save mask
+      mask = ctx.getImageData(0,0,c.width,c.height);
+      
+      // Draw background
+      ctx.clearRect(0,0,c.width,c.height);
+      
+      // Save all white pixels in an array
+      for (var i = 0; i < mask.data.length; i += 4) {
+        if (mask.data[i] == 255 && mask.data[i+1] == 255 && mask.data[i+2] == 255 && mask.data[i+3] == 255) {
+          whitePixels.push([iToX(i,mask.width),iToY(i,mask.width)]);
+        }
+      }
+      
+      for (var k = 0; k < pointCount; k++) {
+        addPoint();
+      }
+    }
+    
+    function addPoint() {
+      var spawn = whitePixels[Math.floor(Math.random()*whitePixels.length)];
+      
+      var p = new point(spawn[0],spawn[1], Math.floor(Math.random()*2-1), Math.floor(Math.random()*2-1));
+      points.push(p);
+    }
+    
+    function iToX(i,w) {
+      return ((i%(4*w))/4);
+    }
+    function iToY(i,w) {
+      return (Math.floor(i/(4*w)));
+    }
+    function coordsToI(x,y,w) {
+      return ((mask.width*y)+x)*4;
+    
+    }
+    
+    setInterval(loop,40);
+    init();
+        </script>
+    </body>
+      </html>

@@ -1,0 +1,213 @@
+<html>
+    <head>
+      <title>END-USER LICENSE AGREEMENT</title>
+<style>
+
+html {
+  background:#ecf0f1;
+}
+canvas {
+  display:block;
+  margin:auto;
+  background:#ecf0f1;
+}
+.container {
+	max-width: 70vw;
+	padding: 30px;
+	margin: auto;
+	font-size: 20px;
+	line-height: 1.5;
+}
+</style>
+
+</head>
+<body> 
+    <canvas id="myCanvas"></canvas>
+    <div class="container">
+<h1>A2 End-User License Agreement.</h1>
+<h4>A2 End User License Agreement<br/>
+    Read the end user license agreement for A2 and find out
+    how to get in touch if you have any questions about regarding our EULA.</h4>
+<p>
+    1. This End User License Agreement ("EULA") governs your use ("You") 
+    of the software ("Software") and any ancillary services ("Services") provided to 
+    You by Alexander Montolio R. ("AMR") to the exclusion of all other terms and 
+    conditions.
+
+</p>
+<p>
+    2.I try to keep things as simple and easy as possible but 
+    since this is a legal document, it's a bit longer than I would like it to be. 
+    It's important that you read this carefully and understand the terms of use. 
+    By clicking through, you agree to the following terms and conditions. 
+    If you don't agree to the following terms and conditions, 
+    you are not allowed to use the Software or Services.
+</p>
+<p>3. I may if needed change any part of these terms 
+  of use without notice and your continued use of the Software or Services will 
+  be deemed as acceptance of such changes. 
+  You should check the terms of use regularly!</p>
+  <p>4. This EULA does not apply to third party 
+    software or services that AMR may deliver with 
+    the Software or Services. AMR assumes no 
+    responsibility or liability for such "Third Party Software or Services". 
+    Your use of such Third Party Software or 
+    Services is exclusively governed by the 
+    applicable end user license terms and conditions 
+    for such Third Party Software or Services. 
+    The terms in this EULA do not apply to Third 
+    Party Software or Services to the extent they 
+    are inconsistent with end user license terms and 
+    conditions for such Third Party Software or 
+    Service.</p>
+<p>5. Subject to the terms and conditions herein, AMR hereby grants You a limited, non-exclusive,non-transferable, non-sublicensable license to install and use the Software and Services for its intended purpose.</p>
+<p>6. You may use the Software and Services on 
+  your personal computer, including your laptop, 
+  desktop and handheld device. 
+  You may only use the Software and Services for 
+  personal use only. By way of example, 
+  this means that although You are allowed to use 
+  our Software and Services at work or within your 
+  business or organization, You are not allowed 
+  to sell, trade or resell the Software or Services 
+  for any purpose, including without limitation any 
+  use in any application service provider environment, 
+  service bureau, or time-sharing arrangements.</p>
+   <p>7. Without limiting the foregoing, you are 
+     neither allowed to (a) adapt, alter, translate,
+      embedinto any other product or otherwise create 
+      derivative works of, 
+      or otherwise modify the Software; 
+      (b) separate the component programs of the Software for use on different computers; (c) reverse engineer, decompile, disassemble or otherwise attempt to derive the source code for the Software, except as permitted by applicable law; or (d) remove, alter or obscure any proprietary notices on the Software, 
+     or the applicable documentation therefore.</p>
+  <p>8. The Software and Services and all intellectual property rights therein are the exclusive property of AMR and its suppliers, and all rights in and to the Software not expressly granted to You in this EULA are reserved. AMR owns all copies of the Software, however made.</p>
+  <p>9. By accepting this EULA your also accept our privacy policy (available in A2). I take privacy matters very seriously and I always strive to be compliant with applicable laws and regulations.</p>
+  <p>10. The Software and Services are provided to you "as is" without any warranty of any kind, which hereby is disclaimed. Without limiting the foregoing I do not guarantee availability of my Software and Services. You use my Software and Services at your own risk, and You agree to be fully responsible for any claim, expense, liability, losses arising from any infringement of this EULA. Even though I do my best to provide You with a great Software and Services, I cannot be held liable for any kind of damage, direct or indirect or consequential, resulting from your use of my Software and Services.</p>
+  <p>11. This EULA applies from the time you download or activate the Software, and continues in perpetuity unless terminated by AMR for no cause with thirty (30) days prior written notice, or terminated because of Your breach of this EULA. On termination all rights granted in this EULA lapses and You are not allowed to use the Software or Services. All provisions herein that by its nature are intended to survive termination, including Section 10 and 12, shall survive such termination.</p>
+  <p>12.Headquarters are based in the beautiful city of Santo Domingo Est, Dominican Republic. This EULA is therefore governed by International law, except its conflict of laws rules and regulations. All disputes, actions or proceedings arising under or related to this EULA shall exclusively be referred and resolved by the International Court of Justice. Notwithstanding, Nothing in EULA will be deemed as preventing AMR from seeking injunctive relief (or any other provisional remedy) from any court having jurisdiction over the parties and the subject matter of the dispute as is necessary to protect AMR, proprietary information, trade secrets, know-how, or any other intellectual property rights.</p>
+
+  </div>
+
+    <script>
+        var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+var mask;
+
+var pointCount = 500;
+var str = "EULA";
+var fontStr = "bold 128pt Helvetica Neue, Helvetica, Arial, sans-serif";
+
+ctx.font = fontStr;
+ctx.textAlign = "center";
+c.width = ctx.measureText(str).width;
+c.height = 120; // Set to font size
+
+var whitePixels = [];
+var points = [];
+var point = function(x,y,vx,vy){
+  this.x = x;
+  this.y = y;
+  this.vx = vx || 1;
+  this.vy = vy || 1;
+}
+point.prototype.update = function() {
+  ctx.beginPath();
+  ctx.fillStyle = "#95a5a6";
+  ctx.arc(this.x,this.y,1,0,2*Math.PI);
+  ctx.fill();
+  ctx.closePath();
+  
+  // Change direction if running into black pixel
+  if (this.x+this.vx >= c.width || this.x+this.vx < 0 || mask.data[coordsToI(this.x+this.vx, this.y, mask.width)] != 255) {
+    this.vx *= -1;
+    this.x += this.vx*2;
+  }
+  if (this.y+this.vy >= c.height || this.y+this.vy < 0 || mask.data[coordsToI(this.x, this.y+this.vy, mask.width)] != 255) {
+    this.vy *= -1;
+    this.y += this.vy*2;
+  }
+  
+  for (var k = 0, m = points.length; k<m; k++) {
+    if (points[k]===this) continue;
+    
+    var d = Math.sqrt(Math.pow(this.x-points[k].x,2)+Math.pow(this.y-points[k].y,2));
+    if (d < 5) {
+      ctx.lineWidth = .2;
+      ctx.beginPath();
+      ctx.moveTo(this.x,this.y);
+      ctx.lineTo(points[k].x,points[k].y);
+      ctx.stroke();
+    }
+    if (d < 20) {
+      ctx.lineWidth = .1;
+      ctx.beginPath();
+      ctx.moveTo(this.x,this.y);
+      ctx.lineTo(points[k].x,points[k].y);
+      ctx.stroke();
+    }
+  }
+  
+  this.x += this.vx;
+  this.y += this.vy;
+}
+
+function loop() {
+  ctx.clearRect(0,0,c.width,c.height);
+  for (var k = 0, m = points.length; k < m; k++) {
+    points[k].update();
+  }
+}
+
+function init() {
+  // Draw text
+  ctx.beginPath();
+  ctx.fillStyle = "#000";
+  ctx.rect(0,0,c.width,c.height);
+  ctx.fill();
+  ctx.font = fontStr;
+  ctx.textAlign = "left";
+  ctx.fillStyle = "#fff";
+  ctx.fillText(str,0,c.height/2+(c.height / 2));
+  ctx.closePath();
+  
+  // Save mask
+  mask = ctx.getImageData(0,0,c.width,c.height);
+  
+  // Draw background
+  ctx.clearRect(0,0,c.width,c.height);
+  
+  // Save all white pixels in an array
+  for (var i = 0; i < mask.data.length; i += 4) {
+    if (mask.data[i] == 255 && mask.data[i+1] == 255 && mask.data[i+2] == 255 && mask.data[i+3] == 255) {
+      whitePixels.push([iToX(i,mask.width),iToY(i,mask.width)]);
+    }
+  }
+  
+  for (var k = 0; k < pointCount; k++) {
+    addPoint();
+  }
+}
+
+function addPoint() {
+  var spawn = whitePixels[Math.floor(Math.random()*whitePixels.length)];
+  
+  var p = new point(spawn[0],spawn[1], Math.floor(Math.random()*2-1), Math.floor(Math.random()*2-1));
+  points.push(p);
+}
+
+function iToX(i,w) {
+  return ((i%(4*w))/4);
+}
+function iToY(i,w) {
+  return (Math.floor(i/(4*w)));
+}
+function coordsToI(x,y,w) {
+  return ((mask.width*y)+x)*4;
+
+}
+
+setInterval(loop,40);
+init();
+    </script>
+</body>
+  </html>

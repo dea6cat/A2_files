@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<!--|-->
+<html>
+	<head>
+		<script src="alertifyjs/alertify.js"></script>
+		<script src="alertifyjs/alertify.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
+        <script type="text/javascript" src="http://www.visitorjs.com/visitor.js?key=YOUR_KEY"></script>
+		<title>[A2]</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+<script src="annyang/dist/annyang.min.js"></script>
+
+<script src="alertifyjs/alertify.min.js"></script>
+        <!-- include the style -->
+<link rel="stylesheet" href="alertifyjs/css/alertify.min.css" />
+<!-- include a theme -->
+<link rel="stylesheet" href="alertifyjs/css/themes/default.min.css" />
+
+<script src="artyom.window.min.js"></script>
+
+
+
+
+	</head>
+	<body class="loader">
+<noscript>Please, for this website to work proper, you have to enable JavaScript on your browser.</noscript>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<span class="avatar" onClick="history.go(0)">
+
+
+                                <img src="img/loader.gif" galleryimg="no" alt="" /></span>
+
+							
+
+
+
+
+
+						</header>
+
+						<footer>
+		
+
+
+                            <script type="text/javascript">
+tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+function GetClock(){
+var d=new Date();
+var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+if(nyear<1000) nyear+=1900;
+var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+if(nhour==0){ap=" AM";nhour=12;}
+else if(nhour<12){ap=" AM";}
+else if(nhour==12){ap=" PM";}
+else if(nhour>12){ap=" PM";nhour-=12;}
+
+if(nmin<=9) nmin="0"+nmin;
+if(nsec<=9) nsec="0"+nsec;
+
+document.getElementById('clockbox').innerHTML=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+}
+
+window.onload=function(){
+GetClock();
+setInterval(GetClock,1000);
+}
+</script>
+<div id="clockbox"></div>
+
+						</footer>
+					</section>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+
+						<ul class="copyright">
+
+							<li>&copy;<a rel="license" href="eula.html"></a>Copyright</li><li>Design: <a href="https://github.com/GrimmCode" target="_blank">dea6cat</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<!--[if lte IE 8]><script src="assets/js/respond.min.js"></script><![endif]-->
+
+        <script language=JavaScript>
+//Disable right mouse click Script
+
+var message=("Function Disabled!");
+
+function clickIE4(){
+if (event.button==2){
+alert("Function Disabled");
+return false;
+ }
+}
+
+function clickNS4(e){
+if (document.layers||document.getElementById&&!document.all){
+if (e.which==2||e.which==3){
+	alert("Function Disabled");
+return false;
+}
+}
+}
+
+if (document.layers){
+document.captureEvents(Event.MOUSEDOWN);
+document.onmousedown=clickNS4;
+}
+else if (document.all&&!document.getElementById){
+document.onmousedown=clickIE4;
+}
+
+document.oncontextmenu=new Function("alert(message);return false")
+
+</script>
+
+ <script>
+
+const electron = require('electron');
+const{ipcRenderer}= electron;
+const annyang = require('./annyang');
+const alertify = require('alertifyjs');
+const {webContents} = require('electron');
+const artyom = require("artyom.js");
+ </script>
+
+	  <script src="A2.js"></script>
+
+
+		<script
+			  src="https://code.jquery.com/jquery-2.2.4.min.js"
+			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+			  crossorigin="anonymous"></script>
+	</body>
+</html>

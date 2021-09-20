@@ -1,0 +1,10 @@
+A2 Virtual Assistant privacy policy
+I do my utmost to protect the security of personal information for users of A2. Find our full privacy policy here.
+
+TERMS & POLICIES
+   
+Alexander Montolio Ramirez (“AMR”), protecting your privacy is a top priority. I strictly protect the security of any and all personal information you provide to us while using AMR products and services. I do not share or sell information to any third party and I proactively protect all user data from disclosure, with the only exception being if requested by legitimate law agencies with a court order.
+
+Your browsing history such as visited URLs, typed search keywords and downloaded content are stored in your client profile and only accessible by your own action. AMR has no access to this data. Your history cannot be shared unless it is by your own action.
+
+A2 features a built-in history dynamic system, which stores your login credentials for sites where you’ve visited. AMR uses password storage frameworks provided by the operating system on your computer device and your data is encrypted if encryption is supported by the framework.
